@@ -20,6 +20,8 @@ public class Game_numGuess {
 		System.out.println("축하합니다!!");
 		
 		sc.close();
+		
+		//모르겠당
 
 	} //end main
 } //end class
