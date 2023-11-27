@@ -7,7 +7,7 @@ public class StudentApp {
 	public static void main(String[] args) {
 		Scanner scn = new Scanner(System.in);
 		int studentNum = 0;
-		int [] scores = null;
+		int[] scores = null;
 		String[] names = null;
 		
 		//1.학생수 2.점수입력 3.목록출력 4.분석(최고점수, 평균) 5.종료
