@@ -28,6 +28,11 @@ public class Game_369 {
 			// 10개씩 줄 바꿈
 			if(i%10 == 0)
 				System.out.println();
+			
+			//for... 추가되었음
+			for(int j=0; j<10; j++) {
+				System.out.println(j);
+			}
 		}
 	} //end main
 } //end class

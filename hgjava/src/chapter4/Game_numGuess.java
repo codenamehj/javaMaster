@@ -6,7 +6,7 @@ public class Game_numGuess {
 
 	public static void main(String[] args) {
 		int com = (int)(Math.random() * 100) + 1;
-		Scanner sc =new Scanner(System.in);
+		Scanner sc = new Scanner(System.in);
 		
 		while(true) {
 			System.out.print("숫자 입력 : ");
