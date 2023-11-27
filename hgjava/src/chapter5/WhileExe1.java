@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class WhileExe1 {
 
 	public static void main(String[] args) {
-		// For: 반복횟수가 덩해져 있는 경우
+		// For: 반복횟수가 정해져 있는 경우
 		
 		// While: 조건을 만족하는 동안 반복
 		Scanner scn = new Scanner(System.in);		
