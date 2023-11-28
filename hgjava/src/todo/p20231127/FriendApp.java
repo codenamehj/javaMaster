@@ -11,58 +11,58 @@ public class FriendApp {
 		
 		while(run) {
 			System.out.println("-----------------------------");
-			System.out.println("1.Ä£±¸¼ö 2.ÀÔ·Â 3.¸ñ·Ï 4.¼öÁ¤ 5.Á¾·á");
+			System.out.println("1.ì¹œêµ¬ìˆ˜ 2.ì¹œêµ¬ì •ë³´ìž…ë ¥ 3.ëª©ë¡ì¶œë ¥ 4.ì—°ë½ì²˜ìˆ˜ì • 5.ì¢…ë£Œ");
 			System.out.println("-----------------------------");
-			System.out.print("¼±ÅÃ: ");
+			System.out.print("ì„ íƒ: ");
 			int select = Integer.parseInt(scn.nextLine());
 			
 			switch(select) {
-			case 1: // Ä£±¸¼ö 
+			case 1: // Ä£ï¿½ï¿½ï¿½ï¿½ 
 				int friendNum = 0;
-				System.out.print("Ä£±¸ ¼ö>> ");
+				System.out.print("ì¹œêµ¬ ìˆ˜>> ");
 				friendNum = Integer.parseInt(scn.nextLine());
 				friends = new Friend[friendNum];
 				break;
-			case 2: // ÀÔ·Â - ÀÌ¸§, ¿¬¶ôÃ³, Ç÷¾×Çü
-				System.out.println("Ä£±¸ Á¤º¸ ÀÔ·Â>>");
+			case 2: // ï¿½Ô·ï¿½ - ï¿½Ì¸ï¿½, ï¿½ï¿½ï¿½ï¿½Ã³, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+				System.out.println("ì¹œêµ¬ ì •ë³´ ìž…ë ¥>>");
 				for(int i = 0; i < friends.length; i++) {
 					Friend friend = new Friend();
-					System.out.print("Ä£±¸ ÀÌ¸§: ");
+					System.out.print("ì´ë¦„: ");
 					friend.name = scn.nextLine();
-					System.out.print("¿¬¶ôÃ³: ");
+					System.out.print("ì—°ë½ì²˜: ");
 					friend.contact = scn.nextLine();
-					System.out.print("Ç÷¾×Çü: ");
+					System.out.print("í˜ˆì•¡í˜•: ");
 					friend.bloodType = scn.nextLine();
 					
 					friends[i] = friend;
 				}
 				break;
-			case 3: // ¸ñ·Ï
-				System.out.println("¸ñ·Ï Ãâ·Â>>");
+			case 3: // ï¿½ï¿½ï¿½
+				System.out.println("ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½>>");
 				for(Friend frd : friends) {
-					System.out.println("ÀÌ¸§: " + frd.name +"\n¿¬¶ôÃ³: " + frd.contact + "\nÇ÷¾×Çü: " + frd.bloodType);
+					System.out.println("ï¿½Ì¸ï¿½: " + frd.name +"\nï¿½ï¿½ï¿½ï¿½Ã³: " + frd.contact + "\nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½: " + frd.bloodType);
 				}
 				break;
-			case 4: // ¼öÁ¤				
-				System.out.println("ÀüÈ­¹øÈ£ ¼öÁ¤>>");
-				System.out.print("¼öÁ¤ÇÒ ÀÌ¸§: ");
+			case 4: // ï¿½ï¿½ï¿½ï¿½				
+				System.out.println("ï¿½ï¿½È­ï¿½ï¿½È£ ï¿½ï¿½ï¿½ï¿½>>");
+				System.out.print("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½: ");
 				String cName = scn.nextLine();
 				boolean exists = false;
 				
 				for(int i = 0; i < friends.length; i++) {
 					if(friends[i].name.equals(cName)) {
-						System.out.print("º¯°æµÈ ÀüÈ­¹øÈ£: ");
+						System.out.print("ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È­ï¿½ï¿½È£: ");
 						String cContact = scn.nextLine();
 						friends[i].contact = cContact;
 						exists = true;
 						}
 					}
 				if(!exists) {
-					System.out.println("Ã£´Â ÀÌ¸§ÀÌ ¾ø½À´Ï´Ù.");
+					System.out.println("Ã£ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
 				}				
 				break;
-			case 5: //Á¾·á
-				System.out.println("ÇÁ·Î±×·¥ Á¾·á");
+			case 5: //ï¿½ï¿½ï¿½ï¿½
+				System.out.println("ï¿½ï¿½ï¿½Î±×·ï¿½ ï¿½ï¿½ï¿½ï¿½");
 				run = false;
 			} //end of switch
 			
