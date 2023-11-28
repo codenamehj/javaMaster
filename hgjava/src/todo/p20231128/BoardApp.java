@@ -8,7 +8,7 @@ public class BoardApp {
 		boolean run = true;
 		Scanner scn = new Scanner(System.in);
 		
-		Board bul = new Board();
+		BoardExe exe = new BoardExe();
 		
 		while(run) {
 			System.out.println("1.등록 2.목록 3.상세조회 4.종료");
@@ -23,7 +23,7 @@ public class BoardApp {
 			case 3:
 				break;
 			case 4:
-				
+				run = false;
 			}
 		}
 

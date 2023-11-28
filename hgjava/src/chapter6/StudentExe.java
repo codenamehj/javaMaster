@@ -13,7 +13,7 @@ public class StudentExe {
 		students[1] = new Student("23-002", "김철수", 82, 85);
 	}
 	
-	//추가 기능
+	// 추가
 	boolean addStudent(Student std) {
 		for(int i = 0; i < students.length; i++) {
 			if(students[i] == null) {
@@ -25,7 +25,7 @@ public class StudentExe {
 		return false;
 	}
 	
-	// 목록 기능
+	// 목록
 	Student[] getStudentList() {
 		return students;
 	}

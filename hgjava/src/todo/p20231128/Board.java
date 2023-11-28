@@ -1,9 +1,7 @@
 package todo.p20231128;
 
 public class Board {
-	// 속성 -> private
-	private Board[] bulletins;
-
+	// 속성
 	int boardNo;
 	String title;
 	String writer;
@@ -13,15 +11,23 @@ public class Board {
 
 	// 생성자
 	Board(){
-		bulletins = new Board[100];
+		
 	}
-
+	
 	public Board(int boardNo, String title, String writer, String content, String date) {
 		this.boardNo = boardNo;
 		this.title = title;
 		this.writer = writer;
 		this.content = content;
 		this.date = date;
+	}
+	
+	// 상세조회 메소드
+	void showDetail(int num) {
+		System.out.println("번호: " + boardNo + "제목: " + title);
+		System.out.println("작성자: " + writer);
+		System.out.println("내용: " + content);
+		System.out.println("일시: " + date);							
 	}
 	
 	// setter & getters 메소드
@@ -64,22 +70,5 @@ public class Board {
 	String getDate() {
 		return date;
 	}
-	
-	
-	// 등록 메소드
-	void addBulletin(Board blt) {
-		for(int i = 0; i < bulletins.length; i++) {
-			
-		}
-	}
-	
-	// 목록 메소드
-	void showInfo() {
-		System.out.println(boardNo + "\t" + title + "\t" + writer);
-	}
-	
-	// 상세조회 메소드
-	
-	
 	
 }
