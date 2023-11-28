@@ -38,31 +38,31 @@ public class FriendApp {
 				}
 				break;
 			case 3: // ���
-				System.out.println("��� ���>>");
+				System.out.println("목록 출력>>");
 				for(Friend frd : friends) {
-					System.out.println("�̸�: " + frd.name +"\n����ó: " + frd.contact + "\n������: " + frd.bloodType);
+					System.out.println("이름: " + frd.name +"\t연락처: " + frd.contact + "\t혈액형: " + frd.bloodType);
 				}
 				break;
 			case 4: // ����				
-				System.out.println("��ȭ��ȣ ����>>");
-				System.out.print("������ �̸�: ");
+				System.out.println("연락처 수정>>");
+				System.out.print("수정할 이름: ");
 				String cName = scn.nextLine();
 				boolean exists = false;
 				
 				for(int i = 0; i < friends.length; i++) {
 					if(friends[i].name.equals(cName)) {
-						System.out.print("����� ��ȭ��ȣ: ");
+						System.out.print("변경된 연락처: ");
 						String cContact = scn.nextLine();
 						friends[i].contact = cContact;
 						exists = true;
 						}
 					}
 				if(!exists) {
-					System.out.println("ã�� �̸��� �����ϴ�.");
+					System.out.println("찾는 이름이 없습니다.");
 				}				
 				break;
 			case 5: //����
-				System.out.println("���α׷� ����");
+				System.out.println("프로그램 종료");
 				run = false;
 			} //end of switch
 			
