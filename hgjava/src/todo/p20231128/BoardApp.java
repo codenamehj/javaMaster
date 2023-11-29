@@ -17,12 +17,18 @@ public class BoardApp {
 			
 			switch(menu) {
 			case 1:
+				System.out.println("게시글 등록>>");
+				System.out.print("게시글 번호: ");
+				int num = Integer.parseInt(scn.nextLine());
 				break;
 			case 2:
+				System.out.println("게시글 목록>>");
 				break;
 			case 3:
+				System.out.println("게시글 상세조회>>");
 				break;
 			case 4:
+				System.out.println("프로그램 종료>>");
 				run = false;
 			}
 		}

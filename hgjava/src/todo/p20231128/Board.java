@@ -8,7 +8,8 @@ public class Board {
 	String content;
 	String date;
 	
-
+//이부분이 변겅되었습니다.
+	
 	// 생성자
 	Board(){
 		
