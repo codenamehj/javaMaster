@@ -7,9 +7,7 @@ public class Board {
 	String writer;
 	String content;
 	String date;
-	
-//이부분이 변겅되었습니다.
-	
+
 	// 생성자
 	Board(){
 		
