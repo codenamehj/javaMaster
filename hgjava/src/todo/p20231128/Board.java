@@ -21,9 +21,14 @@ public class Board {
 		this.date = date;
 	}
 	
+	// 목록 메소드
+	void showInfo() {
+		System.out.println(boardNo + " " + title + " " + writer);
+	}
+	
 	// 상세조회 메소드
-	void showDetail(int num) {
-		System.out.println("번호: " + boardNo + "제목: " + title);
+	void showDetail() {
+		System.out.println("번호: " + boardNo + "/ 제목: " + title);
 		System.out.println("작성자: " + writer);
 		System.out.println("내용: " + content);
 		System.out.println("일시: " + date);							
