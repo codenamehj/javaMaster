@@ -38,7 +38,11 @@ public class FriendExe {
 
 	// 결과 값이 null여부로 여부로 체크(X);
 	public Friend searchPhone(String phone) {
-
+		for (int i = 0; i < storage.length; i++) {
+			if (storage[i] != null && storage[i].getPhone().equals(phone)) {
+				return storage[i];
+			}
+		}
 		return null;
 	}
 }
