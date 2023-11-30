@@ -74,8 +74,6 @@ public class FriendApp {
 		}
 	} // 등록
 
-	// 목록
-
 	private static void getFriend() {
 		// 이름조회, 연락처조회
 		System.out.println("1.이름 2.연락처");
@@ -99,11 +97,12 @@ public class FriendApp {
 
 		} else if (subMenu == 2) {
 			searchCond = scn.nextLine();
-			for (Friend fnd : exe.storage) {
-				if (fnd != null && fnd.getPhone().equals(searchCond)) {
-					System.out.println(fnd.showInfo());
-				}
-			}
+//			for (Friend fnd : exe.storage) {
+//				if (fnd != null && fnd.getPhone().equals(searchCond)) {
+//					System.out.println(fnd.showInfo());
+//				}
+//			}
+			System.out.println(exe.searchPhone(searchCond).showInfo());
 		} else {
 			System.out.println("1 또는 2를 선택하세요.");
 		}
