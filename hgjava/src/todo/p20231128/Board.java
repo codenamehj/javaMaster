@@ -3,6 +3,9 @@ package todo.p20231128;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import lombok.Data;
+
+@Data
 public class Board {
 	// 속성
 	int boardNo;
