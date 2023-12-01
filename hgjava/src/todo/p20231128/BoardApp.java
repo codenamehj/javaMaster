@@ -2,16 +2,17 @@ package todo.p20231128;
 
 import java.util.Scanner;
 
-import chapter6.User;
-import chapter6.UserExe;
+import chapter06.User;
+import chapter06.UserExe;
 
 public class BoardApp {
 	static BoardExe exe = new BoardExe();
+	// 데이터마다 다른 정보를 담을 필요가 없는 클래스는 static 선언
 
 	public static void main(String[] args) {
-		boolean run = true;
 		Scanner scn = new Scanner(System.in);
 		String id = null;
+		boolean run = true;
 
 		UserExe uexe = new UserExe();
 
@@ -36,7 +37,13 @@ public class BoardApp {
 		while (run) {
 			System.out.println("1.등록 2.목록 3.상세조회 4.수정 5.삭제 6.종료");
 			System.out.print("선택: ");
-			int menu = Integer.parseInt(scn.nextLine());
+			int menu = 0;
+			try {
+				menu = Integer.parseInt(scn.nextLine());
+			} catch (NumberFormatException e) {
+				System.out.println("정확한 메뉴를 선택하세요");
+				continue;
+			}
 
 			switch (menu) {
 			case 1:
@@ -71,9 +78,17 @@ public class BoardApp {
 				break;
 
 			case 3:
+				int no = 0;
 				System.out.println("게시글 상세조회>>");
-				System.out.print("조회할 게시글 번호: ");
-				int no = Integer.parseInt(scn.nextLine());
+				while (true) {
+					System.out.print("조회할 게시글 번호: ");
+					try {
+						no = Integer.parseInt(scn.nextLine());
+						break;
+					} catch (NumberFormatException e) {
+						System.out.println("숫자를 입력하세요");
+					}
+				}
 				Board bard = exe.getBoard(no);
 				if (bard != null) {
 					bard.showDetail();
