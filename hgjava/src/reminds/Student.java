@@ -1,4 +1,4 @@
-package chapter06;
+package reminds;
 
 public class Student {
 	// 속성(필드)
@@ -8,6 +8,10 @@ public class Student {
 	int mathScore;
 	
 	// 생성자
+	Student(){
+		
+	}
+	
 	public Student(String studentNo, String studentName, int engScore, int mathScore) {
 		this.studentNo = studentNo;
 		this.studentName = studentName;
