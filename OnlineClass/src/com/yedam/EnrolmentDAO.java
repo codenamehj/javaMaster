@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class MemberDAO {
+public class EnrolmentDAO {
 	Connection conn;
 	PreparedStatement psmt;
 	ResultSet rs;
@@ -36,20 +36,16 @@ public class MemberDAO {
 		}
 	}
 	
-	boolean getMemberInsert(Member member) {
+	boolean getEnrolInsert(String code, String logId) {
 		getConn();
-		String sql = "insert into users "
-				+ "values (?, ?, ?, ?, ?, ?)";
+		String sql = "insert into enrolment(lecture_code, user_id) "
+				+ "values (?, ?) ";
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, member.getName());
-			psmt.setString(2, member.getUid());
-			psmt.setString(3, member.getPwd());
-			psmt.setString(4, member.getBirth());
-			psmt.setString(5, member.getEamil());
-			psmt.setString(6, member.getDiv());
+			psmt.setString(1, code);
+			psmt.setString(2, logId);
 			
-			int r = psmt.executeUpdate();	
+			int r = psmt.executeUpdate();
 			if(r == 1) {
 				return true;
 			}
@@ -62,31 +58,25 @@ public class MemberDAO {
 		return false;
 	}
 	
-	
-	Member loginCheck(String id, String pwd) {
+	Enrolment getEnrolmentList(String logId) {
 		getConn();
 		String sql = "select * "
-				+ "From users "
-				+ "Where id = ?"
-				+ "And password = ?";
+					+ "from enrolment "
+					+ "where user_id = ?";
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, id);
-			psmt.setString(2, pwd);
+			psmt.setString(1, logId);
+			
 			rs = psmt.executeQuery();
 			
 			if(rs.next()) {
-				Member member = new Member();
-				member.setName(rs.getString("name"));
-				member.setDiv(rs.getString("division"));
-				return member;
+				Enrolment enrolment = new Enrolment();
+				return enrolment;
 			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
-			disconn();
 		}
-		return null;	
+		return null;
 	}
 }
