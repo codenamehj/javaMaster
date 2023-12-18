@@ -55,7 +55,9 @@ public class OnlineApp {
 				break;
 			case 3:
 				System.out.println("=====수강중인강의목록=====");
-				
+				for(Lecture l : edao.getEnrolmentList(logId)) {
+					l.showInfo();
+				}
 				break;
 			case 4:
 				break;
@@ -125,10 +127,7 @@ public class OnlineApp {
 	}
 
 	public static void main(String[] args) {
-
 		boolean run = true;
-		String uId;
-		boolean stdMode = false;
 
 		while (run) {
 			System.out.println("1.로그인 2.회원가입");

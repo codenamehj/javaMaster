@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class EnrolmentDAO {
 	Connection conn;
@@ -58,25 +59,33 @@ public class EnrolmentDAO {
 		return false;
 	}
 	
-	Enrolment getEnrolmentList(String logId) {
+	ArrayList<Lecture> getEnrolmentList(String logId) {
 		getConn();
-		String sql = "select * "
-					+ "from enrolment "
-					+ "where user_id = ?";
+		ArrayList<Lecture> enrolAry = new ArrayList<Lecture>();
+		String sql = "select l.lecture_code, l.lecture_title, l.teacher_name, l.student_num, l.lecture_start, l.lecture_price\r\n"
+				+ "from lectures l, enrolment e\r\n"
+				+ "where l.lecture_code = e.lecture_code and e.user_id = ?";
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, logId);
 			
 			rs = psmt.executeQuery();
 			
-			if(rs.next()) {
-				Enrolment enrolment = new Enrolment();
-				return enrolment;
+			while(rs.next()) {
+				Lecture lec = new Lecture();
+				lec.setCode(rs.getString("lecture_code"));
+				lec.setTitle(rs.getString("lecture_title"));
+				lec.setTeacher(rs.getString("teacher_name"));
+				lec.setMaxNum(rs.getInt("student_num"));
+				lec.setStartDate(rs.getString("lecture_start"));
+				lec.setPrice(rs.getInt("lecture_price"));
+				
+				enrolAry.add(lec);
 			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return enrolAry;
 	}
 }
