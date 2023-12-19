@@ -1,20 +1,19 @@
 package com.yedam;
 
 public class Member {
-	private String name, uid, pwd, birth, eamil, div;
+	private String name, uid, pwd, birth, div;
 
 	
 	Member(){
 		
 	}
 	
-	public Member(String name, String uid, String pwd, String birth, String eamil, String div) {
+	public Member(String name, String uid, String pwd, String birth, String div) {
 		super();
 		this.name = name;
 		this.uid = uid;
 		this.pwd = pwd;
 		this.birth = birth;
-		this.eamil = eamil;
 		this.div = div;
 	}
 
@@ -50,14 +49,6 @@ public class Member {
 		this.birth = birth;
 	}
 
-	public String getEamil() {
-		return eamil;
-	}
-
-	public void setEamil(String eamil) {
-		this.eamil = eamil;
-	}
-
 	public String getDiv() {
 		return div;
 	}
@@ -65,8 +56,5 @@ public class Member {
 	public void setDiv(String div) {
 		this.div = div;
 	}
-
-	
-	
 	
 }

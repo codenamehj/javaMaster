@@ -16,7 +16,7 @@ public class MemberDAO {
 		try {
 			Class.forName("oracle.jdbc.OracleDriver");
 			conn = DriverManager.getConnection(url,"dev","dev");
-			System.out.println("연결성공!");
+//			System.out.println("연결성공!");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -39,21 +39,43 @@ public class MemberDAO {
 	boolean getMemberInsert(Member member) {
 		getConn();
 		String sql = "insert into users "
-				+ "values (?, ?, ?, ?, ?, ?)";
+				+ "values (?, ?, ?, ?, ?)";
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, member.getName());
 			psmt.setString(2, member.getUid());
 			psmt.setString(3, member.getPwd());
 			psmt.setString(4, member.getBirth());
-			psmt.setString(5, member.getEamil());
-			psmt.setString(6, member.getDiv());
+			psmt.setString(5, member.getDiv());
 			
 			int r = psmt.executeUpdate();	
 			if(r == 1) {
 				return true;
 			}
 			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			disconn();
+		}
+		return false;
+	}
+	
+	boolean checkUserId(String id) {
+		getConn();
+		String sql = "select id "
+				+ "from users "
+				+ "where id = ?";
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, id);
+			
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				return true;
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -88,5 +110,28 @@ public class MemberDAO {
 			disconn();
 		}
 		return null;	
+	}
+	
+	boolean delUser(String logId, String pw) {
+		getConn();
+		String sql = "DELETE FROM users "
+				+ "WHERE id = ? "
+				+ "AND password = ?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, logId);
+			psmt.setString(2, pw);
+			
+			int r = psmt.executeUpdate();
+			if(r > 0) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			disconn();
+		}
+		return false;
+		
 	}
 }
