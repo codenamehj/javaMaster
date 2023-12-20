@@ -11,6 +11,8 @@ public class OnlineApp {
 	static String logId;
 	static String teacherName;
 	static boolean run = true;
+	static Lecture removeLect = new Lecture("", "");
+	static String div;
 
 	public static Member login() {
 		while (true) {
@@ -21,23 +23,35 @@ public class OnlineApp {
 
 			Member m = mdao.loginCheck(uId, uPw);
 
+			System.out.println("=============================================================");
+
 			if (m != null) {
 				logId = uId;
-				teacherName = m.getName();
+				if (m.getDiv().equals("teacher")) {
+					teacherName = m.getName();
+					div = m.getDiv();
+				}else if(m.getDiv().equals("student")) {
+					div = m.getDiv();
+				}
 				return m;
 			} else {
 				System.out.println("로그인 실패");
 			}
+			System.out.println("=============================================================");
 		}
 	}
 
 	public static void studentFun() {
+		run = true;
 		while (run) {
 			System.out.println("1.강의목록 2.수강신청 3.수강중인강의목록 4.수강취소 5.회원탈퇴 6.종료");
+			System.out.print("선택>> ");
 			int stdtSel = Integer.parseInt(scn.nextLine());
 			switch (stdtSel) {
 			case 1: // 강의목록 보기
 				System.out.println("==========================강의목록==========================");
+				System.out.println("강의코드    강의명   강사      수강시작일       수강인원     강의가격");
+				System.out.println("==========================================================");
 				ArrayList<Lecture> lecAry = ldao.getLectureList();
 				for (Lecture lect : lecAry) {
 					if (lect != null) {
@@ -46,7 +60,7 @@ public class OnlineApp {
 								+ lect.getMaxNum() + "\t" + lect.getPrice() + "원");
 					}
 				}
-				System.out.println("=========================================================");
+				System.out.println("==========================================================");
 				break;
 			case 2:
 				System.out.println("==========================수강신청==========================");
@@ -72,7 +86,14 @@ public class OnlineApp {
 				break;
 			case 3:
 				System.out.println("=======================수강중인강의목록=======================");
+				System.out.println("강의코드    강의명   강사      수강시작일       수강인원     강의가격");
+				System.out.println("==========================================================");
 				ArrayList<Lecture> lecAray = ldao.getStudentLectureList(logId);
+				// 폐강된 강의 공지
+				if (ldao.checkRemovedLecture(removeLect) == null) {
+					System.out.println(removeLect.getCode() + "\t" + removeLect.getTitle() + " 강의가 폐강되었습니다.");
+				}
+				// 폐강된 강의 강의목록에서 삭제
 				for (Lecture lect : lecAray) {
 					if (lect != null) {
 						System.out.println(lect.getCode() + "\t" + lect.getTitle() + "\t" + lect.getTeacher() + "\t"
@@ -92,7 +113,7 @@ public class OnlineApp {
 					} else {
 						System.out.println("수강 중인 강의가 아닙니다.");
 					}
-				}else {
+				} else {
 					System.out.println("이미 강의가 시작되어 취소할 수 없습니다.");
 				}
 				System.out.println("=========================================================");
@@ -100,7 +121,6 @@ public class OnlineApp {
 			case 5:
 				System.out.println("==========================회원탈퇴==========================");
 				signout();
-				System.out.println("=========================================================");
 				break;
 			case 6:
 				System.out.println("종료합니다");
@@ -110,6 +130,7 @@ public class OnlineApp {
 	} // end of if
 
 	public static void teacherFunc() {
+		run = true;
 		while (run) {
 			System.out.println("1.강의추가 2.강의목록 3.강의취소 4.회원탈퇴 5.종료");
 			int tchSel = Integer.parseInt(scn.nextLine());
@@ -139,7 +160,9 @@ public class OnlineApp {
 				System.out.println("=========================================================");
 				break;
 			case 2:
-				System.out.println("==========================나의 강의목록==========================");
+				System.out.println("========================나의 강의목록========================");
+				System.out.println("강의코드    강의명   강사      수강시작일       수강인원     강의가격");
+				System.out.println("==========================================================");
 				ArrayList<Lecture> lecAry = ldao.getTeacherLectureList(teacherName);
 				for (Lecture lect : lecAry) {
 					if (lect != null) {
@@ -152,13 +175,19 @@ public class OnlineApp {
 				break;
 			case 3:
 				System.out.println("==========================강의취소==========================");
-
+				System.out.print("삭제할 강의 코드>> ");
+				String delCode = scn.nextLine();
+				removeLect = ldao.getRemoveLect(delCode);
+				if (ldao.delTeacherLecture(delCode, teacherName)) {
+					System.out.println("성공적으로 강의가 삭제되었습니다.");
+				} else {
+					System.out.println("삭제할 강의가 존재하지 않습니다.");
+				}
 				System.out.println("=========================================================");
 				break;
 			case 4:
 				System.out.println("==========================회원탈퇴==========================");
 				signout();
-				System.out.println("=========================================================");
 				break;
 			case 5:
 				System.out.println("종료합니다");
@@ -176,6 +205,16 @@ public class OnlineApp {
 				run = false;
 			} else {
 				System.out.println("회원탈퇴 실패: 비밀번호가 맞지않습니다.");
+				System.out.println("1.비밀번호 다시 입력 2.나가기");
+				int sel = Integer.parseInt(scn.nextLine());
+				if(sel == 2) {
+					run = false;
+					if(div.equals("student")) {
+					studentFun();
+					}else {
+						teacherFunc();
+					}
+				}
 			}
 		}
 	}
@@ -184,7 +223,9 @@ public class OnlineApp {
 		boolean run = true;
 
 		while (run) {
+			System.out.println("==================공부하자 할수있다 수강신청 프로그램===================");
 			System.out.println("1.로그인 2.회원가입");
+			System.out.print("선택>> ");
 			int menu = Integer.parseInt(scn.nextLine());
 			Member memb = null;
 			switch (menu) {
@@ -199,6 +240,7 @@ public class OnlineApp {
 				break;
 
 			case 2: // 회원가입
+				System.out.println("==========================회원가입==========================");
 				System.out.print("이름>> ");
 				String name = scn.nextLine();
 
@@ -227,7 +269,9 @@ public class OnlineApp {
 				} else {
 					System.out.println("회원가입 실패");
 				}
-
+				System.out.println("=========================================================");
+			default:
+				System.out.println("보기에 있는 선택을 해주세요.");
 			}
 
 		} // end of while.

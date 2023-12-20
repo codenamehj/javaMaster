@@ -12,7 +12,12 @@ public class Lecture {
 	Lecture(){
 		
 	}
-	
+		
+	public Lecture(String code, String title) {
+		this.code = code;
+		this.title = title;
+	}
+
 	public Lecture(String code, String title, String teacher, String startDate, int maxNum, int price) {
 		
 		this.code = code;

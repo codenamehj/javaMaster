@@ -16,7 +16,7 @@ public class LectureDAO {
 	ResultSet rs;
 
 	Connection getConn() {
-		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+		String url = "jdbc:oracle:thin:@192.168.0.27:1521:xe";
 		try {
 			Class.forName("oracle.jdbc.OracleDriver");
 			conn = DriverManager.getConnection(url, "dev", "dev");
@@ -92,15 +92,13 @@ public class LectureDAO {
 		}
 		return lectures;
 	}
-	
-	//수강중인 강의 목록(학생)
+
+	// 수강중인 강의 목록(학생)
 	ArrayList<Lecture> getStudentLectureList(String logId) {
 		getConn();
 		ArrayList<Lecture> lectures = new ArrayList<Lecture>();
 		String sql = "SELECT l.lecture_code, l.lecture_title, l.teacher_name, l.lecture_start, l.student_num, l.lecture_price "
-				+ "FROM lectures l,enrolment e "
-				+ "WHERE  e.user_id= ? "
-				+ "AND l.lecture_code = e.lecture_code";
+				+ "FROM lectures l,enrolment e " + "WHERE  e.user_id= ? " + "AND l.lecture_code = e.lecture_code";
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, logId);
@@ -124,23 +122,50 @@ public class LectureDAO {
 		return lectures;
 	}
 	
-	//수강취소
-	boolean delLecture(String code, String logId){
+	//폐강된 강의 체크
+	Lecture checkRemovedLecture(Lecture lec) {
 		getConn();
-		String sql = "DELETE FROM enrolment "
-				+ "WHERE lecture_code = ?"
-				+ "AND user_id = ?";
+		String sql = "SELECT * "
+				+ "FROM lectures "
+				+ "where lecture_code = ?";
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, lec.getCode());
+			
+			rs = psmt.executeQuery();
+			
+			Lecture lect = new Lecture("","");
+			lect.setCode(lec.getCode());
+			lect.setTitle(lec.getTitle());
+			
+			if(rs.next()) {
+				return lect;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			disconn();
+			
+		}
+		return null;
+	}
+	
+	// 수강취소(학생)
+	boolean delLecture(String code, String logId) {
+		getConn();
+		String sql = "DELETE FROM enrolment " + "WHERE lecture_code = ?" + "AND user_id = ?";
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, code);
 			psmt.setString(2, logId);
 			int r = psmt.executeUpdate();
-			if(r > 0) {
+			if (r > 0) {
 				return true;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			disconn();
 		}
 		return false;
@@ -172,6 +197,57 @@ public class LectureDAO {
 			disconn();
 		}
 		return lectures;
+	}
+
+	// 강의 취소(선생님)
+	boolean delTeacherLecture(String code, String teacherName) {
+		getConn();
+		String sql = "DELETE FROM lectures " + "WHERE lecture_code = ?" + "AND teacher_name = ?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, code);
+			psmt.setString(2, teacherName);
+			
+			int r = psmt.executeUpdate();
+			
+			if(r > 0) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconn();
+		}
+		return false;
+	}
+	
+	//강의 취소할 데이터 저장용 메소드
+	Lecture getRemoveLect(String code) { 
+		getConn();
+		String sql = "SELECT * "
+				+ "FROM lectures "
+				+ "where lecture_code = ?";
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, code);
+			rs = psmt.executeQuery();
+			
+			Lecture lec = new Lecture("","");
+			
+			if(rs.next()) {
+				lec.setCode(rs.getString("lecture_code"));
+				lec.setTitle(rs.getString("lecture_title"));
+				
+				return lec;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			disconn();
+		}
+		return null;
 	}
 
 	int getLectureCount(String lecCode) {
@@ -227,7 +303,7 @@ public class LectureDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			disconn();
 		}
 		return null;
