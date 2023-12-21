@@ -11,7 +11,7 @@ public class OnlineApp {
 	static String logId;
 	static String teacherName;
 	static boolean run = true;
-	static Lecture removeLect = new Lecture("", "");
+	static Lecture removeLect = new Lecture(null, null);
 	static String div;
 
 	public static Member login() {
@@ -90,7 +90,7 @@ public class OnlineApp {
 				System.out.println("==========================================================");
 				ArrayList<Lecture> lecAray = ldao.getStudentLectureList(logId);
 				// 폐강된 강의 공지
-				if (ldao.checkRemovedLecture(removeLect) == null) {
+				if (ldao.checkRemovedLecture(removeLect) == null && removeLect.getCode() != null) {
 					System.out.println(removeLect.getCode() + "\t" + removeLect.getTitle() + " 강의가 폐강되었습니다.");
 				}
 				// 폐강된 강의 강의목록에서 삭제
@@ -224,7 +224,7 @@ public class OnlineApp {
 
 		while (run) {
 			System.out.println("==================공부하자 할수있다 수강신청 프로그램===================");
-			System.out.println("1.로그인 2.회원가입");
+			System.out.println("1.로그인 2.회원가입 3.프로그램종료");
 			System.out.print("선택>> ");
 			int menu = Integer.parseInt(scn.nextLine());
 			Member memb = null;
@@ -270,6 +270,11 @@ public class OnlineApp {
 					System.out.println("회원가입 실패");
 				}
 				System.out.println("=========================================================");
+				break;
+			case 3:
+				System.out.println("프로그램 종료");
+				run = false;
+				break;
 			default:
 				System.out.println("보기에 있는 선택을 해주세요.");
 			}
