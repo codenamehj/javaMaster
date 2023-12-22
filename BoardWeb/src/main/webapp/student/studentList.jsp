@@ -1,6 +1,8 @@
-<%@page import="common.Student"%>
+<%@page import="com.yedam.student.serviceimpl.StudentServiceImpl"%>
+<%@page import="com.yedam.student.service.StudentService"%>
+<%@page import="com.yedam.student.vo.Student"%>
 <%@page import="java.util.List"%>
-<%@page import="common.StudentDAO"%>
+<%@page import="com.yedam.student.mapper.StudentDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -22,8 +24,8 @@
 		</thead>
 		<tbody>
 			<%
-			StudentDAO dao = new StudentDAO();
-			List<Student> list = dao.getStudentList();
+			StudentService dao = new StudentServiceImpl();
+			List<Student> list = dao.studentList();
 
 			for (Student std : list) {
 			%>

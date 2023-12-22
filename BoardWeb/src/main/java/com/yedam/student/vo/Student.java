@@ -1,11 +1,11 @@
-package common;
+package com.yedam.student.vo;
 
 public class Student {
 	// 속성(필드)
-	String studentNo; //student_no
-	String studentName;
-	int engScore;
-	int mathScore;
+	private String studentNo; //student_no
+	private String studentName;
+	private int engScore;
+	private int mathScore;
 	
 	// 생성자
 	public Student(){

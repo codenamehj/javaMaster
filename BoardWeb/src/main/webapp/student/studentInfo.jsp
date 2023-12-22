@@ -1,3 +1,6 @@
+<%@page import="com.yedam.student.vo.Student"%>
+<%@page import="com.yedam.student.serviceimpl.StudentServiceImpl"%>
+<%@page import="com.yedam.student.service.StudentService"%>
 <%@page import="common.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -12,7 +15,7 @@
 		String str = "Hello";
 		//내장객체: reuest
 		String sno = request.getParameter("sno");
-		StudentDAO dao = new StudentDAO();
+		StudentService dao = new StudentServiceImpl();
 		Student std = dao.getStudent(sno);
 	%>
 	
