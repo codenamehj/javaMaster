@@ -204,3 +204,6 @@ insert into member values('user2','2222','김철수','User');
 insert into member values('user3','3333','관리자','Admin');
 
 commit;
+
+----2023-12-27
+select * from student;
