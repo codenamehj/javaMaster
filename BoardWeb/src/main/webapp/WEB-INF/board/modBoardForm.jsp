@@ -3,9 +3,6 @@
 	
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-	
-<%@ include file="../layout/menu.jsp" %>
-<%@ include file="../layout/nav.jsp" %>
 
 	<h3>수정화면</h3>
 
