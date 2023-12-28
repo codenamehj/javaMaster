@@ -71,4 +71,3 @@
 		}
 		
 	</script>
-<%@ include file="../layout/foot.jsp" %>

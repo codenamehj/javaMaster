@@ -31,6 +31,7 @@ public class LoginControl implements Control {
 			HttpSession session = req.getSession();
 			session.setAttribute("logId", vo.getId()); // 세션객체에 로그인아이디값 저장
 			session.setAttribute("logName", vo.getName()); // 세션객체에 로그인아이디값 저장
+			session.setAttribute("responsibility", vo.getResponsibility()); //세션객체에 로그인권한값 저장
 			
 			try {
 				resp.sendRedirect("boardList.do");

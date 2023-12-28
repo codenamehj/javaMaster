@@ -4,31 +4,31 @@
 
 <div class="border-end bg-white" id="sidebar-wrapper">
 	<c:choose>
-				<c:when test="${empty logName }">
-					<div class="sidebar-heading border-bottom bg-light">Guest</div>
-				</c:when>
-				<c:otherwise>
-					<div class="sidebar-heading border-bottom bg-light">★${logName }님★</div>
-				</c:otherwise>
-			</c:choose>
+		<c:when test="${empty logName }">
+			<div class="sidebar-heading border-bottom bg-light">Guest</div>
+		</c:when>
+		<c:otherwise>
+			<div class="sidebar-heading border-bottom bg-light">★${logName }님★</div>
+		</c:otherwise>
+	</c:choose>
 
-			<div class="list-group list-group-flush">
-			<a class="list-group-item list-group-item-action list-group-item-light p-3"	href="boardList.do">글목록</a>
-			
-				<c:choose>
-					<c:when test="${empty logId }">
-						<a
-							class="list-group-item list-group-item-action list-group-item-light p-3"
-							href="loginForm.do">로그인</a>
-					</c:when>
-					<c:otherwise>
-						<a class="list-group-item list-group-item-action list-group-item-light p-3"	href="loginout.do">로그아웃</a>
-						<a class="list-group-item list-group-item-action list-group-item-light p-3"	href="boardForm.do">글 등록</a>
-					</c:otherwise>
-				</c:choose>
-				
-				<a class="list-group-item list-group-item-action list-group-item-light p-3"	href="#!">Events</a>
-				<a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Profile</a>
-				<a class="list-group-item list-group-item-action list-group-item-light p-3"	href="#!">Status</a>
-			</div>
+	<div class="list-group list-group-flush">
+		<c:choose>
+			<c:when test="${empty logId }">
+				<a class="list-group-item list-group-item-action list-group-item-light p-3"	href="loginForm.do">로그인</a>
+			</c:when>
+			<c:otherwise>
+				<a class="list-group-item list-group-item-action list-group-item-light p-3"	href="loginout.do">로그아웃</a>
+				<a class="list-group-item list-group-item-action list-group-item-light p-3"	href="boardForm.do">글 등록</a>
+			</c:otherwise>
+		</c:choose>
+		
+		<a class="list-group-item list-group-item-action list-group-item-light p-3"	href="boardList.do">글 목록</a>
+		<c:if test="${responsibility eq 'Admin' }">
+			<a class="list-group-item list-group-item-action list-group-item-light p-3"	href="memberList.do">회원관리</a>
+			<a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Profile</a>
+			<a class="list-group-item list-group-item-action list-group-item-light p-3"	href="#!">Status</a>
+		</c:if>
+		
+	</div>
 </div>
