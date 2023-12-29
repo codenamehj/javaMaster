@@ -1,6 +1,7 @@
 package com.yedam.product.command;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,15 +19,19 @@ public class ProductInfoControl implements Control {
 	public void execute(HttpServletRequest req, HttpServletResponse resp) {
 		// 상품 코드 조회
 		String pno = req.getParameter("pno");
-		
+
 		ProductService svc = new ProductServiceImpl();
 		ProductVO vo = svc.getProduct(pno);
-		
+
 		req.setAttribute("vo", vo);
-		
+
+		List<ProductVO> list = svc.productList();
+
+		req.setAttribute("productList", list);
+
 		// 페이징 이동(forward)
 		RequestDispatcher rd = req.getRequestDispatcher("product/productInfo.tiles");
-		
+
 		try {
 			rd.forward(req, resp);
 		} catch (ServletException | IOException e) {
