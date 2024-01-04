@@ -38,3 +38,21 @@ set.forEach(name => console.log(name));
 const numAry = [10, 14, 12, 10];
 const num = new Set(numAry); // 배열 -> Set
 num.forEach(number => console.log(number));
+
+console.clear();
+map.clear();
+
+map.set('김명철', 80);
+map.set('김익수', 70);
+map.set('이명김', 80);
+map.set('이익김', 85);
+map.set('홍길동', 80);
+
+map.forEach((score, name) => console.log(name, score));
+
+// 김씨 점수의 합계
+let sum = 0;
+map.forEach((val, key) => {
+    if (key.indexOf('김') == 0) sum += val
+})
+console.log(`김씨 점수의 합계: ${sum}점`);
