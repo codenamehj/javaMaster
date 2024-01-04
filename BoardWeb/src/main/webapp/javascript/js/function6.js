@@ -33,7 +33,7 @@ let result = [4, 5, 6].reduce((acc, curItem, idx, ary) => {
     console.log(acc, curItem, idx);
     return acc + curItem;
 }, 0);
-console.log('결과값: ' + result);
+console.log('결과값: ' + result); //
 
 //map 메소드
 result = [1, 2, 3, 4].map((item, idx, ary) => {
