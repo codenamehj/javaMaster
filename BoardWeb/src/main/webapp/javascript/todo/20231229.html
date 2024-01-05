@@ -10,6 +10,55 @@
             width: 300px;
             /* height: 250px; */
             height: 400px;
+            background-color: aqua;
+        }
+
+        span {
+            display: inline-block;
+            width: 95px;
+            height: 30px;
+            /* margin 추가 */
+            margin: 5px 2px;
+            background-color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="show">
+        <!-- <span>Lorem</span>
+        <span>ipsum</span> -->
+    </div>
+    <script>
+        const words = 
+            'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deserunt odio aperiam possimus. Quas perspiciatis quam odio perferendis possimus aperiam non voluptates eaque repellat corporis, quis ipsam minus magnam? Sed, consequatur.'
+        const wordAry = words.split(' ');
+
+        // console.log(wordAry);
+
+        for(let word of wordAry){
+            // console.log(word);
+            let span = document.createElement('span');
+            span.innerText = word;
+            document.querySelector('#show').appendChild(span);
+        }
+
+    </script>
+</body>
+
+=======
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>todo/20231229.html</title>
+    <style>
+        #show {
+            width: 300px;
+            /* height: 250px; */
+            height: 400px;
             background-color: rgb(120, 110, 200);
         }
 
@@ -77,4 +126,5 @@
     </script>
 </body>
 
+>>>>>>> branch 'master' of https://github.com/codenamehj/javaMaster.git
 </html>
