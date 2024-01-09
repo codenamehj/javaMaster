@@ -2,75 +2,93 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>todo/20240104.html</title>
-    <style>
-        #show {
-            width: 300px;
-            /* height: 250px; */
-            height: 400px;
-            background-color: rgb(120, 110, 200);
-        }
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>todo/20240104.html</title>
+	<style>
+		#show {
+			width: 300px;
+			/* height: 250px; */
+			height: 400px;
+			background-color: rgb(120, 110, 200);
+		}
 
-        span {
-            display: inline-block;
-            width: 95px;
-            height: 30px;
-            /* margin 추가 */
-            margin: 5px 2px;
-            background-color: rgb(230, 130, 190);
-        }
-    </style>
+		span {
+			display: inline-block;
+			width: 95px;
+			height: 30px;
+			/* margin 추가 */
+			margin: 5px 2px;
+			background-color: rgb(230, 130, 190);
+		}
+	</style>
+	<script>
+
+		document.addEventListener('DOMContentLoaded', function () {
+			// 이 페이지의 모든 DOM요소를 load한 다음에 실행
+			const words =
+				'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deserunt odio aperiam possimus. Quas perspiciatis quam odio perferendis possimus aperiam non voluptates eaque repellat corporis, quis ipsam minus magnam? Sed, consequatur.'
+			const wordAry = words.split(' ');
+
+			let str = wordAry.reduce((acc, word) => {
+				acc += '<span>' + word + '</span>';
+				return acc;
+			}, '');
+			document.getElementById('show').innerHTML = str;
+
+			// id = delBtn 에 클릭 이벤트
+			document.querySelector('#delBtn').addEventListener('click', function () {
+				// 사용자의 입력값(userInput) == 화면상의 span 요소를 가져와서 spanAll: span.remove();
+				// 사용자 입력화면 초기화
+				let userInput = document.querySelector('#userValue').value;
+				let spanAll = document.querySelectorAll('#show>span');
+				spanAll.forEach(function (word) {
+					console.log(word.innerText);
+					console.log(userInput);
+					if (userInput == word.innerText) {
+						word.remove();
+					}
+				})
+				// 초기화
+				document.querySelector('#userValue').value = '';
+				document.querySelector('#userValue').focus();
+			})
+
+			// input[name="userValue"]
+			document.querySelector("input[name='userValue']").addEventListener("keyup", function (e) {
+				console.log(e.keyCode);
+				if (e.keyCode == 13) {
+					let userInput = document.querySelector('#userValue').value;
+					let span = document.createElement('span');
+					span.innerText = userInput;
+					document.querySelector('#show').appendChild(span);
+					show.appendChild(span);
+					document.querySelector('#userValue').value = '';
+				}
+			})
+
+			// for 반복문
+			// for(let word of wordAry){
+			//     // console.log(word);
+			//     let span = document.createElement('span');
+			//     span.innerText = word;
+			//     document.querySelector('#show').appendChild(span);
+			// }	
+		});
+
+	</script>
 </head>
 
 <body>
 
-    <input type="text" name="userValue" id="userValue" autofocus>
-    <button id="delBtn">삭제</button>
+	<input type="text" name="userValue" id="userValue" autofocus>
+	<button id="delBtn">삭제</button>
 
-    <div id="show">
-        <!-- <span>Lorem</span>
+	<div id="show">
+		<!-- <span>Lorem</span>
         <span>ipsum</span> -->
-    </div>
-    <script>
-        const words =
-            'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deserunt odio aperiam possimus. Quas perspiciatis quam odio perferendis possimus aperiam non voluptates eaque repellat corporis, quis ipsam minus magnam? Sed, consequatur.'
-        const wordAry = words.split(' ');
+	</div>
 
-        let str = wordAry.reduce((acc, word) => {
-            acc += '<span>' + word + '</span>';
-            return acc;
-        }, '');
-        document.getElementById('show').innerHTML = str;
-
-        // id = delBtn 에 클릭 이벤트
-        document.querySelector('#delBtn').addEventListener('click', function () {
-            // 사용자의 입력값(userInput) == 화면상의 span 요소를 가져와서 spanAll: span.remove();
-            // 사용자 입력화면 초기화
-            let userInput = document.querySelector('#userValue').value;
-            let spanAll = document.querySelectorAll('#show>span');
-            spanAll.forEach(function (word) {
-                console.log(word.innerText);
-                console.log(userInput);
-                if (userInput == word.innerText) {
-                    word.remove();
-                }
-            })
-            // 초기화
-            document.querySelector('#userValue').value = '';
-            document.querySelector('#userValue').focus();
-        })
-
-        // for 반복문
-        // for(let word of wordAry){
-        //     // console.log(word);
-        //     let span = document.createElement('span');
-        //     span.innerText = word;
-        //     document.querySelector('#show').appendChild(span);
-        // }
-
-    </script>
 </body>
 
 </html>
