@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>test2</title>
+</head>
+
+<body>
+	<!--문제2 -->
+	<!-- 2024년 1월 달력을 출력하세요. cal.show() 메소드를 호출. -->
+	<table border="1">
+		<thead id="theader"></thead>
+		<tbody id="tbody"></tbody>
+	</table>
+	<script>
+		const januaryCal = {
+			days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+
+			show: function () {
+				this.makeTitle(this.days, document.getElementById('theader'));
+				this.makeBody(1, document.getElementById('tbody'));
+			}, // end of makeCalender
+
+			makeTitle: function (days, pos) {
+				let tr = document.createElement('tr');
+				days.forEach(function (day) {
+					let th = document.createElement('th');
+					th.innerText = day;
+					tr.appendChild(th);
+				})
+				pos.appendChild(tr);
+			}, // end of makeTitle
+
+			makeBody: function (month, pos) {
+				let tr = document.createElement('tr');
+				// 공백
+				let firstDay = 1;
+				for (let i = 0; i < firstDay; i++) {
+					let td = document.createElement('td');
+					td.innerText = '';
+					tr.appendChild(td);
+				}
+				// 날짜
+				let lastDate = 31;
+				for (let i = 1; i <= lastDate; i++) {
+					let td = document.createElement('td');
+					// td 속성 추가.
+					// 토요일: lightskyblue, 일요일: lightpink
+					if ((firstDay + i) % 7 == 0) {
+						td.setAttribute('style', 'background-color: lightskyblue');
+					} else if ((firstDay + i) % 7 == 1) {
+						td.setAttribute('style', 'background-color: lightpink');
+					}
+					td.innerText = i;
+					tr.appendChild(td);
+
+					if ((firstDay + i) % 7 == 0) {
+						pos.appendChild(tr);
+						tr = document.createElement('tr');
+					}
+				}
+				pos.appendChild(tr);
+			} // end of makeBody
+		}
+		januaryCal.show();
+	</script>
+
+</body>
+
+</html>

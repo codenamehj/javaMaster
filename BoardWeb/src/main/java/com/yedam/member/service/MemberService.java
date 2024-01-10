@@ -8,4 +8,9 @@ public interface MemberService {
 	public MemberVO login(String id, String pw);
 	public List<MemberVO> memberList();
 	public MemberVO getMember(String mid); //id 조회
+	
+	// 등록, 삭제
+	public boolean addMember(MemberVO vo);
+	public boolean removeMember(String id);
+	
 }

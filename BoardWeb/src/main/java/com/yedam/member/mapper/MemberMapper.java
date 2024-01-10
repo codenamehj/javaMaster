@@ -11,4 +11,9 @@ public interface MemberMapper {
 	List<MemberVO> selectList();
 	MemberVO selectOne(String mid);
 	
+	// 입력, 삭제
+	public int insertMember(MemberVO vo);
+	public int deleteMember(String id);
+	
+	
 }

@@ -131,6 +131,7 @@
 						});
 					}
 				} // end of showList
+				
 				function showList(page) {
 					ul.innerHTML = '';
 					fetch('replyListJson.do?bno=' + bno + '&page=' + page)

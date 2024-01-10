@@ -18,7 +18,8 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="memberList.do">회원목록</a>
+                                	<a class="nav-link" href="memberList.do">회원목록</a>
+                                    <a class="nav-link" href="memberListAjax.do">회원목록(Ajax)</a>
                                     <a class="nav-link" href="grtMember.do">회원상세</a>
                                 </nav>
                             </div>
