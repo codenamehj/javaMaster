@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .goodsimg {
+            width: 300px;
+        }
+
+        .goodsborder {
+            border: 3px solid pink;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="goods">
+        <h1>상품1</h1>
+        <img src="레드향.jpg" alt="레드향.jpg" class="goodsimg goodsborder">
+        <div>가격:1000</div>
+        <div>
+            <button data-goodno="g1" data-price="1000" class="btnOrder">주문</button>
+        </div>
+    </div>
+    <!-- <div class="goods">
+        <h1>상품2</h1>
+        <img src="사과.jpg" alt="사과.jpg" width="200px">
+        <div>가격:2000</div>
+        <div>
+            <button data-goodno="g2" data-price="2000" class="btnOrder">주문</button>
+        </div>
+    </div> -->
+    <script>
+        const btnOrders = document.querySelectorAll('.btnOrder');
+
+        // for (let i = 0; i < btnOrders.length; i++) {
+        //     btnOrders[i].addEventListener('click', function () {
+        //         console.log(window.event.target.dataset.goodno);
+        //     })
+        // }
+
+        // for (let btnNode of btnOrders) {
+        //     btnNode.addEventListener('click', function () {
+        //         console.log(window.event.target.dataset.goodno);
+        //     })
+        // }
+
+        // for (let idx in btnOrders) {
+        //     btnOrders[idx].addEventListener('click', function () {
+        //         console.log(event.target.dataset.goodno); // window는 생략가능
+        //     })
+        // }
+
+        btnOrders.forEach(node => {
+            node.addEventListener('click', function () {
+                console.log(event.target.dataset.goodno);
+            })
+        });
+
+        const newNode =
+            `<div class="goods">
+                <h1>상품2</h1>
+                <img src="사과.jpg" alt="사과.jpg" width="200px">
+                <div>가격:2000</div>
+                <div>
+                    <button data-goodno="g2" data-price="2000" class="btnOrder">주문</button>
+                </div>
+            </div>`;
+    </script>
+</body>
+
+</html>
