@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.yedam.book.command.BookListControl;
+import com.yedam.book.command.BookListJson;
 
 public class FrontController extends HttpServlet {
 	// 생명주기: 생성자 -> init() -> service() -> destroy()
@@ -25,6 +26,9 @@ public class FrontController extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		// 도서목록.
 		map.put("/bookList.do", new BookListControl());
+		map.put("/bookListJson.do", new BookListJson());
+		
+		
 	}
 
 	@Override

@@ -19,7 +19,7 @@
 
 			show: function () {
 				this.makeTitle(this.days, document.getElementById('theader'));
-				this.makeBody(1, document.getElementById('tbody'));
+				this.makeBody(document.getElementById('tbody'));
 			}, // end of makeCalender
 
 			makeTitle: function (days, pos) {
@@ -32,30 +32,28 @@
 				pos.appendChild(tr);
 			}, // end of makeTitle
 
-			makeBody: function (month, pos) {
+			makeBody: function (pos) {
 				let tr = document.createElement('tr');
 				// 공백
-				let firstDay = 1;
-				for (let i = 0; i < firstDay; i++) {
+				for (let i = 0; i < 1; i++) {
 					let td = document.createElement('td');
 					td.innerText = '';
 					tr.appendChild(td);
 				}
 				// 날짜
-				let lastDate = 31;
-				for (let i = 1; i <= lastDate; i++) {
+				for (let i = 1; i <= 31; i++) {
 					let td = document.createElement('td');
 					// td 속성 추가.
 					// 토요일: lightskyblue, 일요일: lightpink
-					if ((firstDay + i) % 7 == 0) {
+					if ((1 + i) % 7 == 0) {
 						td.setAttribute('style', 'background-color: lightskyblue');
-					} else if ((firstDay + i) % 7 == 1) {
+					} else if ((1 + i) % 7 == 1) {
 						td.setAttribute('style', 'background-color: lightpink');
 					}
 					td.innerText = i;
 					tr.appendChild(td);
 
-					if ((firstDay + i) % 7 == 0) {
+					if ((1 + i) % 7 == 0) {
 						pos.appendChild(tr);
 						tr = document.createElement('tr');
 					}
