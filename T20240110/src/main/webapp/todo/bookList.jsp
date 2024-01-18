@@ -7,32 +7,6 @@
 <title>20240110</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script>
-	$(document).ready(function() {
-		// 책 목록 출력
-		$.ajax('bookList.do', {
-			method: 'get',
-			dataType: 'json', // 서버의 데이터 포맷을 지정
-			success: function(result) {
-				console.log(result);
-				$(result).each((idx, book) => {
-					console.log(book);
-					// tr, td 생성
-					let tr = $('<tr />').append($('<td />').text(book.bookCode),
-						$('<td />').text(book.bookName),
-						$('<td />').text(book.bookAuthor),
-						$('<td />').text(book.bookPress),
-						$('<td />').text(book.bookPrice)
-					);
-					$('#list').append(tr);
-				}); //forEach
-			},
-			error: function(err) {
-				console.log(err);
-			}
-		})
-	})
-</script>
 </head>
 <body>
 	<h3>책목록</h3>
@@ -50,5 +24,32 @@
 		</thead>
 		<tbody id="list"></tbody>
 	</table>
+	<script>
+	$(document).ready(function() {
+		// 책 목록 출력
+		$.ajax('bookListJson.do', {
+	        method: 'get',
+	        dataType: 'json',
+	        success: function(result) {
+	            $(result).each((idx, book) => {
+	                // tr 생성, td 생성
+	                let tr = $('<tr />').append($('<td />').append('<input type="checkbox">'),
+	                							$('<td />').text(book.bookCode),
+	                                            $('<td />').text(book.bookName),
+	                                            $('<td />').text(book.bookAuthor),
+	                                            $('<td />').text(book.bookPress),
+	                                            $('<td />').text(book.bookPrice),
+	                                            $('<button id="delBtn"/>').text('삭제')
+	                                            );
+	                $('#list').append(tr);
+	            });
+	        },
+	        error: function(err) {
+	            console.error(err);
+	        }
+	    })
+	})
+	</script>
+
 </body>
 </html>
