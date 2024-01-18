@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="kor">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>바닐라 자바 스크립트</h3>
+    <input type="text" id="txt">
+    <button id="btn" type="button">추가</button>
+    <ul id="sel">
+        <li>바나나</li>
+        <li>사과</li>
+    </ul>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
+    <script>
+
+        // 자바스크립트
+        document.querySelector('ul').addEventListener('click', function () {
+            
+            if (event.target.nodeName == 'LI') {
+                event.target.style.backgroundColor = 'pink';
+            }
+        })
+
+        // 제이쿼리
+        // $('ul').on('click', 'li', function () {
+        //     $(event.target).css('backgroundColor', 'yellowgreen');
+        // })
+
+        $('#btn').on('click', function () {
+            let textValue = $('#txt').val();
+            $('#sel').append($('<li>').text(textValue));
+        })
+    </script>
+
+</body>
+
+</html>

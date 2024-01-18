@@ -1,1 +1,6 @@
 /test-classes/
+/build/
+/target/
+*.class
+.project
+.classpath
