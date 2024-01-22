@@ -211,16 +211,16 @@ insert into product
  values (5, '2024 캘린더', '좋아요', 'b1.jpg', 15000, 10000, 0, 50, '캘린더'); 
 
 --inquire
-select * from inquire;
+select * from inquire order by 1;
 
 insert into inquire
- values (inq_no_seq.nextval, '홍길동', 3, '문의드려요', 'ㅇㅇㅇㅇㅇㅇㅇㅇ', '2024/01/15', 'D001.png', '답변', '2024 위클리');
+ values (inq_no_seq.nextval, 'user1', 3, '문의드려요', 'ㅇㅇㅇㅇㅇㅇㅇㅇ', '2024/01/15', 'D001.png', '답변', '2024 위클리');
 insert into inquire
- values (inq_no_seq.nextval, '이이이', 3, '문의드려요', 'ㅇㅇㅇㅇㅇㅇㅇㅇ', '2024/01/15', 'D002.png', '답변', '2024 위클리');
+ values (inq_no_seq.nextval, 'user5', 3, '문의드려요', 'ㅇㅇㅇㅇㅇㅇㅇㅇ', '2024/01/15', 'D002.png', '답변', '2024 위클리');
 insert into inquire
- values (inq_no_seq.nextval, '오오오', 5, '문의드려요', 'ㅇㅇㅇㅇㅇㅇㅇㅇ', '2024/01/15', 'D002.png', '답변', '2024 캘린더');
+ values (inq_no_seq.nextval, 'user1', 5, '문의드려요', 'ㅇㅇㅇㅇㅇㅇㅇㅇ', '2024/01/15', 'D002.png', '답변', '2024 캘린더');
 insert into inquire
- values (inq_no_seq.nextval, '이지은', 4, '문의드려요', 'ㅇㅇㅇㅇㅇㅇㅇㅇ', '2024/01/15', 'D001.png', '답변', '2024 먼슬리');
+ values (inq_no_seq.nextval, 'user3', 4, '문의드려요', 'ㅇㅇㅇㅇㅇㅇㅇㅇ', '2024/01/15', 'D001.png', '답변', '2024 먼슬리');
 
 --orderlist
 select * from orderlist;
@@ -288,3 +288,21 @@ CREATE SEQUENCE re_no_seq;
 --이미지(img_no_seq)
 CREATE SEQUENCE img_no_seq;
 
+
+--mapper용
+select pro_code, pro_name from product
+where category='다이어리';
+
+select * from inquire order by 1;
+
+insert into inquire(inq_no, user_id, pro_code, inq_title, inq_content, inq_date, inq_img, prod_name)
+values(inq_no_seq.nextval, 'user2', '5', '문의드려요', 'ㅇㅇㅇㅇㅇㅇㅇㅇ', sysdate, 'D001.png', '2024 먼슬리');
+
+update inquire set inq_content ='ggggg', inq_img='D001.png' where inq_no = 4;
+
+
+select b.* from
+(select rownum rn, a.* from
+    (select * from inquire) a 
+)b
+where b.rn > (1-1)*9 and b.rn <= 1*9 order by inq_no;
